@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/homebackground"
+    android:gravity="center"
+    android:orientation="vertical">
+
+    <ImageButton
+        android:id="@+id/imgShot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/button_around"
+        android:onClick="CaptureImage"
+        android:src="@drawable/ic_baseline_camera_alt_24" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="chụp Ảnh"
+        android:textColor="#000000"
+        android:textSize="25sp" />
+
+    <ImageButton
+        android:id="@+id/imgLibrary"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="55dp"
+        android:background="@drawable/button_around"
+        android:onClick="displayImage"
+        android:src="@drawable/ic_baseline_photo_library_24" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Thư Viện"
+        android:textColor="#000000"
+        android:textSize="25sp" />
+
+</LinearLayout>
