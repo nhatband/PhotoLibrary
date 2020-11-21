@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import com.example.photolibrary.Activity.CameraResultActivity;
 import com.example.photolibrary.R;
 
 import java.io.File;
@@ -29,9 +31,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.SimpleFormatter;
 
+import static android.app.Activity.RESULT_OK;
+
 public class HomeFragment extends Fragment {
     String currentImagePath;
-    private static final int IMAGE_REQUEST = 1;
+    public static final int IMAGE_REQUEST = 1;
     ImageButton imgShot, imgLibrary;
 
     @Nullable
@@ -57,20 +61,32 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+//    private void dispatchTakePictureIntent() {
+//        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//        Log.d("log_package_manager", getActivity().getPackageManager().toString());
+////        Log.d("test_photo:", cameraIntent.resolveActivity(getActivity().getPackageManager()).toString());
+//        if (cameraIntent.resolveActivity(this.getActivity().getPackageManager())!=null) {
+//
+//            File imageFile = null;
+//            try {
+//                imageFile = getImageFile();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//            if (imageFile != null) {
+//                Uri imageUri = FileProvider.getUriForFile(getContext(), "com.example.android.fileprovider", imageFile);
+//                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
+//                getActivity().startActivityForResult(cameraIntent, IMAGE_REQUEST);
+//            }
+//        }
+//    }
+
     private void dispatchTakePictureIntent() {
-        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (cameraIntent.resolveActivity(getActivity().getPackageManager())!=null) {
-            File imageFile = null;
-            try {
-                imageFile = getImageFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            if (imageFile != null) {
-                Uri imageUri = FileProvider.getUriForFile(getContext(), "com.example.android.fileprovider", imageFile);
-                cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
-                getActivity().startActivityForResult(cameraIntent, IMAGE_REQUEST);
-            }
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        try {
+            startActivityForResult(takePictureIntent, IMAGE_REQUEST);
+        } catch (ActivityNotFoundException e) {
+            // display error state to the user
         }
     }
 
@@ -82,4 +98,20 @@ public class HomeFragment extends Fragment {
         currentImagePath = imageFile.getAbsolutePath();
         return imageFile;
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("on_activity_result", "is called");
+        if (requestCode == IMAGE_REQUEST && resultCode == RESULT_OK) {
+            Log.d("request_code", "is_correct");
+            Bundle extras = data.getExtras();
+            Bitmap imageBitmap = (Bitmap) extras.get("data");
+            Intent intent = new Intent(this.getActivity(), CameraResultActivity.class);
+            intent.putExtra("photo_result_bitmap", imageBitmap);
+            startActivity(intent);
+
+//            imageView.setImageBitmap(imageBitmap);
+        }
+    }
+
 }
