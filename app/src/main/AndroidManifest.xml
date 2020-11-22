@@ -20,7 +20,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activity.CameraResultActivity"></activity>
+        <activity android:name=".Activity.LibraryActivity"></activity>
         <activity android:name=".Activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +31,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.photolibrary.provider"
+            android:authorities="com.example.photolibrary.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

@@ -3,9 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/mimageView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="4dp" />
+  <GridView
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:id="@+id/grv_images"
+      />
 </RelativeLayout>
