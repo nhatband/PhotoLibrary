@@ -47,19 +47,20 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), LibraryActivity.class);
                 intent.putExtra("image_path", currentImagePath);
+                getActivity().finish();
                 startActivity(intent);
             }
         });
         return view;
     }
 
-    private File getImageFile() throws IOException {
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageName = "jpg_" + timeStamp + "_";
-        File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File imageFile = File.createTempFile(imageName, ".jpg", storageDir);
-        currentImagePath = imageFile.getAbsolutePath();
-        return imageFile;
-    }
+//    private File getImageFile() throws IOException {
+//        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+//        String imageName = "jpg_" + timeStamp + "_";
+//        File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+//        File imageFile = File.createTempFile(imageName, ".jpg", storageDir);
+//        currentImagePath = imageFile.getAbsolutePath();
+//        return imageFile;
+//    }
 
 }
